@@ -39,12 +39,21 @@ public class ExecutiveReport {
         }
 
         public Builder addSection(String v) {
+            if (v == null || v.isBlank()) {
+                throw new IllegalArgumentException("La sección no puede estar vacía");
+            }
             sections.add(v);
             return this;
         }
 
-        public ExecutiveReport build() { // TODO: validate required fields and build report
-            throw new UnsupportedOperationException("Implement Builder");
+        public ExecutiveReport build() {
+            if (title == null || title.isBlank()) {
+                throw new IllegalStateException("El título es obligatorio");
+            }
+            if (period == null || period.isBlank()) {
+                throw new IllegalStateException("El periodo es obligatorio");
+            }
+            return new ExecutiveReport(this);
         }
     }
 }
